@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  nginx-user
+  namespace: default
+  labels:
+    app:  nginx-user
+spec:
+  selector:
+    matchLabels:
+      app: nginx-user
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app:  nginx-user
+    spec:
+      containers:
+      - name:  nginx-user
+        image:  nginx:1.22.1-perl
+        resources:
+          requests:
+            cpu: 500m
+          limits:
+            cpu: 1000m
+        env:
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: nginx-user-cm
+              key: database-url
+        ports:
+        - containerPort:  80
