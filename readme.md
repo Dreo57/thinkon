@@ -22,4 +22,4 @@ In order to ensure that the development team has a limited as accessibility, a r
 In order to apply configs to multiple environment, namespace will be set-up for each environment in kubernetes and the config is deployed in each namespace
 
 ## How would you auto-scale the deployment based on network latency instead of CPU?
-Autoscaling based on network latency can be achieved by using a custom metric. It will involve installing a metric server that will retrieve netrics like the network latency. Under the metric in the hpa.yml, the resource name will be network latency while targetAverageUtilization will be set in milliseconds such that when the latency goes above the set target, new replica will be created.
+Autoscaling based on network latency can be achieved by using a custom metric. It will involve installing a metric server on a side car container in the same pod that will retrieve metrics like the network latency. Under the metric in the hpa.yml, the resource name will be network latency while targetAverageUtilization will be set in milliseconds such that when the latency goes above the set target, new replica will be created.
