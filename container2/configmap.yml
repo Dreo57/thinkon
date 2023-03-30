@@ -1,7 +1,0 @@
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: apache-shift-cm
-  namespace: default
-data:
-  database-url: mongodb://mongo:27017/dev-shift
